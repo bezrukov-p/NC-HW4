@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form method="POST" action="#" th:action="@{/add-user}" th:object="${user}">
+    <p>first name: <input type="text" th:field="*{firstName}" /></p>
+    <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</div>
+    <p>last name: <input type="text" th:field="*{lastName}" /></p>
+    <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</div>
+    <p>patronymic: <input type="text" th:field="*{patronymic}" /></p>
+    <div style="color:red" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">Name Error</div>
+    <p>age: <input type="text" th:field="*{age}" /></p>
+    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name Error</div>
+    <p>salary: <input type="text" th:field="*{salary}" /></p>
+    <div style="color:red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">Name Error</div>
+    <p>email: <input type="text" th:field="*{email}" /></p>
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
+    <p>place of work: <input type="text" th:field="*{placeOfWork}" /></p>
+    <div style="color:red" th:if="${#fields.hasErrors('placeOfWork')}" th:errors="*{placeOfWork}">Name Error</div>
+    <p>
+        <input type="submit" value="Add" />
+        <input type="reset" value="Reset" />
+    </p>
+</form>
+
+
+    <a href="/main"> main</a>
+</body>
+</html>
