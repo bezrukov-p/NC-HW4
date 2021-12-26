@@ -14,7 +14,7 @@ import java.util.Scanner;
 @Component
 public class UserDAO {
     private List<User> users;
-    private String filepath = "src/main/";
+    private String filepath = "src/main/resources/";
 
     public UserDAO() throws IOException {
         users = new ArrayList<>();

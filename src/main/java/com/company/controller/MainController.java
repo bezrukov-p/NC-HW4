@@ -1,7 +1,10 @@
 package com.company.controller;
 
 import com.company.dao.UserDAO;
+import com.company.model.Information;
+import com.company.model.Letter;
 import com.company.model.User;
+import com.company.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +16,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Date;
 
 @Controller
 public class MainController {
 
     private UserDAO userDAO;
+    private EmailService emailService;
 
     @Autowired
-    public MainController(UserDAO userDAO) {
+    public MainController(UserDAO userDAO, EmailService emailService) {
         this.userDAO = userDAO;
+        this.emailService = emailService;
     }
 
     @GetMapping("/main")
@@ -43,7 +49,7 @@ public class MainController {
 
         this.userDAO.addUser(user);
         model.addAttribute("users", userDAO.getUsers());
-        return "list-users";
+        return "redirect:/list-users";
     }
 
     @GetMapping("/search-user")
@@ -61,9 +67,17 @@ public class MainController {
             return "search-user";
 
         User user1 = this.userDAO.searchUser(user.getFirstName(), user.getLastName());
-        if (user1 == null)
+        if (user1 == null) {
+            model.addAttribute("user", user);
             return "user-not-found";
+        }
+
+        Date creationTime = new Date(request.getSession().getCreationTime());
+        String clientInfo = request.getHeader("User-Agent");
+        Information information = new Information(creationTime, clientInfo);
+
         model.addAttribute("user", user1);
+        model.addAttribute("info", information);
         return "found-user";
     }
 
@@ -71,6 +85,31 @@ public class MainController {
     public String allUsers(Model model) {
         model.addAttribute("users", this.userDAO.getUsers());
         return "list-users";
+    }
+
+    @GetMapping("/send-email")
+    public String sendEmailForm(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("letter", new Letter());
+
+        return "send-email";
+    }
+
+    @PostMapping("/send-email")
+    public String sendEmail(@ModelAttribute Letter letter,
+                            @ModelAttribute User user,
+                            Model model) {
+
+        User recipient = userDAO.searchUser(user.getFirstName(), user.getLastName());
+        if (user == null) {
+            model.addAttribute("user", user);
+            return "user-not-found";
+        }
+
+        model.addAttribute("user", recipient);
+        emailService.sendSimpleMessage(recipient.getEmail(), letter.getSubject(), letter.getMessage());
+
+        return "message-sent";
     }
 
 }

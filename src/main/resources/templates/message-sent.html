@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'The message was sent to ' + ${user.firstName} + ' ' + ${user.lastName} + ' at address ' + ${user.email}" />
+<a href="/main"> main</a>
+</body>
+</html>
