@@ -1,8 +1,8 @@
 package com.company.model;
 
 public class Letter {
-    String subject;
-    String message;
+    private String subject;
+    private String message;
 
     public Letter() {
         subject = "";

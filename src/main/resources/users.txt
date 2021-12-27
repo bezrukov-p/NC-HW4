@@ -2,5 +2,5 @@ Pavel Bezrukov Dmitrievich 22 123 Hegativenn@yandex.ru -
 Petr Petrov Petrovich 17 0 Petr@yandex.ru -
 Ivan Ivanov Ivanovich 17 0 Ivan@yandex.ru -
 маша иванова дмитриевна 22 321 123@yandex.ru -
-321 32131 321312 232 3232 3232@yandex.ru 21
-Alina Kuznetsova - 22 0 kuznetsovaai@icloud.com -
+first second patronymic 22 321 123@yandex.ru -
+first second patronymic 22 321 123@yandex.ru -

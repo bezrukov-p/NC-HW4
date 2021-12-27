@@ -3,8 +3,8 @@ package com.company.model;
 import java.util.Date;
 
 public class Information {
-    Date date;
-    String nameClient;
+    private Date date;
+    private String nameClient;
 
     public Information(Date date, String nameClient) {
         this.date = date;
